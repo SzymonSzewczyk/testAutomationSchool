@@ -12,27 +12,26 @@ import java.util.List;
 /**
  * blazedemo.com tests
  */
-public class BlazedemoComponentAndWaitTest extends SeleniumTest
-{
+public class BlazedemoComponentAndWaitTest extends SeleniumTest {
 
-    private List<String> flightNumbersOrder = Arrays.asList("43", "234", "9696", "12", "4346");
+	private List<String> flightNumbersOrder = Arrays.asList("43", "234", "9696", "12", "4346");
 
-    /**
-     * Shows how to use components
-     */
-    @Test(groups = {"SMOKE"})
-    public void loginTest() {
-        new ChooseFlightPage(driver, "http://blazedemo.com")
-                .getHeader()
-                .clickHomeLink()
-                .clickLoginButton()
-                .getHeader()
-                .clickBlazeDemoLink()
-                .clickFindFlights()
-            .check(new FlightOptionsAssertion())
-                .verifyFlightNumberOrder(flightNumbersOrder)
-                .verifyWaitUntilCanBeUsed();
-    }
+	/**
+	 * Shows how to use components
+	 */
+	@Test(groups = {"SMOKE"})
+	public void loginTest() {
+		new ChooseFlightPage(driver, "http://blazedemo.com")
+				.getHeader()
+				.clickHomeLink()
+				.clickLoginButton()
+				.getHeader()
+				.clickBlazeDemoLink()
+				.clickFindFlights()
+				.check(new FlightOptionsAssertion())
+				.verifyFlightNumberOrder(flightNumbersOrder)
+				.verifyWaitUntilCanBeUsed();
+	}
 
 
 }

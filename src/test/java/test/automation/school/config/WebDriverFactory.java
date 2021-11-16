@@ -1,6 +1,5 @@
 package test.automation.school.config;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public abstract class WebDriverFactory {

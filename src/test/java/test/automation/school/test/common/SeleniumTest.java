@@ -9,8 +9,8 @@ import org.testng.annotations.BeforeSuite;
 import test.automation.school.config.*;
 
 public abstract class SeleniumTest {
-    protected WebDriver driver;
-    private WebDriverFactory webDriverFactory = getWebDriverFactory();
+	protected WebDriver driver;
+	private WebDriverFactory webDriverFactory = getWebDriverFactory();
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(ITestContext context) {
@@ -20,23 +20,23 @@ public abstract class SeleniumTest {
         }
     }
 
-    @BeforeClass(alwaysRun = true)
-    public void classSetup() {
-        driver = webDriverFactory.getDriver(
-                DriverType.valueOf(System.getProperty("driver", "chrome").toUpperCase()));
-    }
+	@BeforeClass(alwaysRun = true)
+	public void classSetup() {
+		driver = webDriverFactory.getDriver(
+				DriverType.valueOf(System.getProperty("driver", "chrome").toUpperCase()));
+	}
 
-    @AfterClass(alwaysRun = true)
-    public void classTeardown() {
-        driver.quit();
-    }
+	@AfterClass(alwaysRun = true)
+	public void classTeardown() {
+		driver.quit();
+	}
 
-    public WebDriver getDriver() {
-        return driver;
-    }
+	public WebDriver getDriver() {
+		return driver;
+	}
 
-    private WebDriverFactory getWebDriverFactory() {
-        boolean isRemote = Boolean.valueOf(System.getProperty("remote", "false"));
-        return isRemote ? new RemoteWebDriverFactory() : new LocalWebDriverFactory();
-    }
+	private WebDriverFactory getWebDriverFactory() {
+		boolean isRemote = Boolean.valueOf(System.getProperty("remote", "false"));
+		return isRemote ? new RemoteWebDriverFactory() : new LocalWebDriverFactory();
+	}
 }

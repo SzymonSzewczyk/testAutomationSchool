@@ -1,7 +1,9 @@
 package test.automation.school.config;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.devtools.v95.browser.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -11,13 +13,12 @@ import java.util.ResourceBundle;
 
 /**
  * Factory for different types of drivers.
- * This can be controlled via command line parameter.
  */
 public class RemoteWebDriverFactory extends WebDriverFactory {
     private String gridUrl = ResourceBundle.getBundle("config").getString("grid.url");
 
     protected WebDriver getFirefoxDriver() {
-        Capabilities capabilities = DesiredCapabilities.firefox();
+        Capabilities capabilities = new DesiredCapabilities("firefox", "96", Platform.WINDOWS);
         try {
             return new RemoteWebDriver(new URL(gridUrl), capabilities);
         } catch (MalformedURLException e) {
@@ -26,7 +27,7 @@ public class RemoteWebDriverFactory extends WebDriverFactory {
     }
 
     protected WebDriver getChromeDriver() {
-        Capabilities capabilities = DesiredCapabilities.chrome();
+        Capabilities capabilities = new DesiredCapabilities("chrome", "94", Platform.WINDOWS);
         try {
             return new RemoteWebDriver(new URL(gridUrl), capabilities);
         } catch (MalformedURLException e) {
@@ -34,12 +35,8 @@ public class RemoteWebDriverFactory extends WebDriverFactory {
         }
     }
 
+    @Override
     protected WebDriver getInternetExplorerDriver() {
-        Capabilities capabilities = DesiredCapabilities.internetExplorer();
-        try {
-            return new RemoteWebDriver(new URL(gridUrl), capabilities);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        throw new RuntimeException("IE Not supported");
     }
 }

@@ -11,33 +11,33 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Page {
-    protected WebDriver driver;
+	protected WebDriver driver;
 
-    public Page(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+	public Page(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
 
-    public <G extends Page, T extends Assertion<G>> T check(T assertion) {
-        assertion.setPage((G)this);
-        return assertion;
-    }
+	public <G extends Page, T extends Assertion<G>> T check(T assertion) {
+		assertion.setPage((G) this);
+		return assertion;
+	}
 
-    public <Input extends Page, Output extends Page> Output run(Scenario<Input, Output> scenario) {
-        return scenario.run((Input) this);
-    }
+	public <Input extends Page, Output extends Page> Output run(Scenario<Input, Output> scenario) {
+		return scenario.run((Input) this);
+	}
 
-    public <T> T waitUntil(ExpectedCondition<T> expectedCondition) {
-        return waitUntil(expectedCondition, 10);
-    }
+	public <T> T waitUntil(ExpectedCondition<T> expectedCondition) {
+		return waitUntil(expectedCondition, 10);
+	}
 
-    public <T> T waitUntil(ExpectedCondition<T> expectedCondition, int timeoutSeconds) {
-        return new WebDriverWait(driver, timeoutSeconds)
-                .pollingEvery(Duration.ofMillis(100))
-                .until(expectedCondition);
-    }
+	public <T> T waitUntil(ExpectedCondition<T> expectedCondition, int timeoutSeconds) {
+		return new WebDriverWait(driver, timeoutSeconds)
+				.pollingEvery(Duration.ofMillis(100))
+				.until(expectedCondition);
+	}
 
-    public WebDriver getDriver() {
-        return driver;
-    }
+	public WebDriver getDriver() {
+		return driver;
+	}
 }
